@@ -1,2 +1,2 @@
 # WHO-GHO-API-Data-Pipeline
-Testett
+This a API and Data pipeline made to interface with the WHO GHO Athena API.
