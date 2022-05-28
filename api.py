@@ -1,17 +1,15 @@
 import os
 import requests
-import datetime
-import calendar
+from datetime import datetime
 #WHO GHO Athen API - https://www.who.int/data/gho/info/athena-api
 
 #https://apps.who.int/gho/athena/api/COUNTRY - List of countries
 #https://apps.who.int/gho/athena/api/REGION - List of regions
 #?profile=simple&filter=COUNTRY:BWA;YEAR:2020;YEAR:2023 - multiple filters
 
-
 #Get different dimensions - https://apps.who.int/gho/athena/api/GHO
 dimension = "M_Est_tob_curr_std"
-params = {'profile': 'simple', 'filter': 'COUNTRY:USA'}
+params = {'profile': 'simple', 'filter': 'COUNTRY:USA;COUNTRY:CAN;COUNTRY:CHN;COUNTRY:JPN'}
 download_request_url = "https://apps.who.int/gho/athena/api/GHO/" + dimension + ".json"
 
 #Check values
@@ -41,9 +39,20 @@ except Exception as exception_message:
 if status_code < 200 or status_code > 299: #200-299 are successful HTTP response codes
     error_status = True
 
+#Format Params for File name
+formatted_params = ""
+read = False
+for i in range(len(params["filter"])):
+    if read == True:
+        formatted_params += params['filter'][i]
+    if params['filter'][i] == ":":
+        read = True
+    if params['filter'][i] == ";":
+        read = False
+
 #Write to file
 if error_status != True:
-    fname = os.path.join("C:/API&Pipeline/staging", "datapull-{}.json".format(calendar.timegm(datetime.datetime.utcnow().utctimetuple())))
+    fname = os.path.join("C:/API&Pipeline/staging", "{}_{}.json".format(datetime.now().strftime("%Y%m%d"), formatted_params))
     data = response.content
     with open(fname, 'wb') as f:
             f.write(data)
