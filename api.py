@@ -1,15 +1,16 @@
 import os
 import requests
 from datetime import datetime
-#WHO GHO Athen API - https://www.who.int/data/gho/info/athena-api
+#WHO GHO Athena API - https://www.who.int/data/gho/info/athena-api
 
 #https://apps.who.int/gho/athena/api/COUNTRY - List of countries
 #https://apps.who.int/gho/athena/api/REGION - List of regions
-#?profile=simple&filter=COUNTRY:BWA;YEAR:2020;YEAR:2023 - multiple filters
-
 #Get different dimensions - https://apps.who.int/gho/athena/api/GHO
-dimension = "M_Est_tob_curr_std"
-params = {'profile': 'simple', 'filter': 'COUNTRY:USA;COUNTRY:CAN;COUNTRY:CHN;COUNTRY:JPN'}
+#?profile=simple&filter=COUNTRY:BWA;YEAR:2020;YEAR:2023 - multiple filters
+#'filter': 'COUNTRY:USA;COUNTRY:CAN;COUNTRY:CHN;COUNTRY:JPN'
+
+dimension = "M_Est_cig_curr"
+params = {'profile': 'simple', 'filter': 'COUNTRY:JPN'}
 download_request_url = "https://apps.who.int/gho/athena/api/GHO/" + dimension + ".json"
 
 #Check values
@@ -17,8 +18,8 @@ print("Download URl:", download_request_url)
 print("Params:", params)
 error_status = False
 
-
-try: #Test request
+#Test request
+try: 
     response = requests.get(download_request_url, params=params, allow_redirects=True, timeout=90)
 except Exception as exception_message:
     message = 'requests.get failed -'
@@ -26,8 +27,8 @@ except Exception as exception_message:
     error_status = True
     raise Exception(exception_message) 
     
-
-try: #Test status code of request
+#Test status code of request
+try: 
     status_code = response.status_code
     print("Status Code:", status_code)
 except Exception as exception_message:
