@@ -127,7 +127,7 @@ def validate(file_name):
 
     #Cleans up based off of if there is an error(s) or not
     if is_errors == True:
-        with open(r"C:\API&Pipeline\validate\errors\error_{}.txt".format(file_name[0:file_name.find(".")]), 'w') as f:
+        with open(r"C:\API&Pipeline\errors\error_{}.txt".format(file_name[0:file_name.find(".")]), 'w') as f:
             if len(errors) > 0:
                 f.write("Errors:\n\n")
                 for entry_key in errors.keys():
