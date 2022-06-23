@@ -57,3 +57,9 @@ if error_status != True:
     data = response.content
     with open(fname, 'wb') as f:
             f.write(data)
+    
+    #Write additionally to control file
+    fname = os.path.join("C:/API&Pipeline/testing", "control_file_{}.json".format(formatted_params))
+    with open(fname, 'wb') as f:
+            f.write(data)
+
