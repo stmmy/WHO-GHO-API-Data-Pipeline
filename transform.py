@@ -51,3 +51,4 @@ def transform(file_name):
         logs.loc[len(logs.index)] = [file_name, "Data outputted in csv, old files deleted", datetime.now(), "Transformation"]
         logs.to_csv('logs.csv', mode='a', index=False, header=False)
         return True
+    
