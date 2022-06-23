@@ -57,3 +57,4 @@ def process(file_name):
         shutil.copyfile(src_path, target_path)
         os.remove(src_path)
         return True
+        
