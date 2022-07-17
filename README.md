@@ -10,14 +10,24 @@ The pipeline scripts will need to be modified slightly or heavily, depending on 
 Folder Structure : 
 
 *---Main
+
 *------api
+
 *---------api.py
+
 *------errors
+
 *------process
+
 *------staging
+
 *------testing
+
 *------transform
+
 *------validate
+
 *------(rest of python scripts and logs.csv)
+
 
 Call the api, change the code to connect to your sql server, and run the pipeline controller
